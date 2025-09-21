@@ -22,7 +22,7 @@ class BoardArray : public Board {
         void print() {
             for (int i = 0; i < index; i++) {
                 cout << i + 1 << ". ";
-                (array + i * sizeof(Entry))->print();
+                array[i].print();
             }
         }
 };
