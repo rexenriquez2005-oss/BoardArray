@@ -16,7 +16,39 @@ class BoardArray : public Board {
         void add(Entry* entry) {
             // TODO: IMPLEMENT THIS FUNCTION
             // ALGORITHM IS PROVIDED IN INSTRUCTIONS.TXT
-            return;
+            if (index == 0) {
+                array[0] = *entry;
+                index++;
+                return;
+            }
+            int inPos = -1;
+            for (int i = 0; i < index; i++) {
+                if (entry->compare(&array[i])) { 
+                    inPos = i;
+                    break;
+                }
+            }
+            if (inPos == -1 && index < SIZE) {
+                array[index] = *entry;
+                index++;
+                return;
+            }
+            if (inPos == -1 && index == SIZE) {
+                cout << entry->name << "'s score is too low to be added!" << endl;
+                return;
+            }
+            if (index == SIZE) {
+                for (int i = SIZE - 1; i > inPos; i--) {
+                    array[i] = array[i - 1];
+                }
+                array[inPos] = *entry;
+            } else {
+                for (int i = index; i > inPos; i--) {
+                    array[i] = array[i - 1];
+                }
+                array[inPos] = *entry;
+                index++;
+            }
         }
 
         void print() {
